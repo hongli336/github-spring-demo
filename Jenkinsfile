@@ -3,6 +3,7 @@ pipeline {
 
     environment {
         JAVA_HOME = '/opt/homebrew/opt/openjdk@21'
+        SPRING_DATASOURCE_PASSWORD = credentials('spring-datasource-password')
     }
 
     stages {
