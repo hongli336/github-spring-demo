@@ -33,7 +33,7 @@ pipeline {
             steps {
                 script {
                     // run your application
-                    sh '/opt/homebrew/bin/mvn spring-boot:run &'
+                    sh '/opt/homebrew/bin/mvn spring-boot:run'
                 }
             }
         }
