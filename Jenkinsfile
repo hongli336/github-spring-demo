@@ -15,7 +15,7 @@ pipeline {
         stage('Build') {
             steps {
                 script {
-                    sh 'mvn clean install'
+                    sh '/opt/homebrew/bin/mvn clean install'
                 }
             }
         }
@@ -23,7 +23,7 @@ pipeline {
         stage('Test') {
             steps {
                 script {
-                    sh 'mvn test'
+                    sh '/opt/homebrew/bin/mvn test'
                 }
             }
         }
