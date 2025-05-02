@@ -28,11 +28,11 @@ pipeline {
             }
         }
 
-        stage('Deploy') {
+        stage('Run') {
             steps {
                 script {
-                    // Deploy your application, e.g., copy the war file or Docker commands
-                    echo 'Deploying application...'
+                    // run your application
+                    sh '/opt/homebrew/bin/mvn spring-boot:run'
                 }
             }
         }
