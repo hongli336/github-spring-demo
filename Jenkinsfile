@@ -32,7 +32,7 @@ pipeline {
             steps {
                 script {
                     // run your application
-                    sh '/opt/homebrew/bin/mvn spring-boot:run'
+                    sh 'nohup /opt/homebrew/bin/mvn spring-boot:run &'
                 }
             }
         }
