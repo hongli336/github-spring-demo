@@ -9,6 +9,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RestController
 public class DemoController {
 
+
+    @GetMapping("/hello/{name}")
+    public HelloResponse helloParam(@PathVariable String name) {
+        //return "Hello, world!";
+        return new HelloResponse("Hello, world!" + name);
+    }
+
     @GetMapping("/hello")
     public HelloResponse hello() {
         //return "Hello, world!";
