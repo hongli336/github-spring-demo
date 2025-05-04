@@ -12,4 +12,9 @@ public class DemoController {
         return new HelloResponse("Hello, world!");
     }
 
+    @PostMapping("/hello")
+    public HelloResponse helloPost(@RequestBody String name) {
+        return new HelloResponse("hello, " + name);
+    }
+
 }
