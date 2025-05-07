@@ -15,4 +15,11 @@ public class CategoryController {
     public List<Category> getAllCategories() {
         return categories;
     }
+
+    @PostMapping("/api/public/categories")
+    public String createCategory(@RequestBody Category category) {
+
+        categories.add(category);
+        return "Category added successfully";
+    }
 }
