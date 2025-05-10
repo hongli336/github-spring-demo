@@ -30,6 +30,6 @@ public class CategoryServiceImpl implements CategoryService {
                 .filter(c -> c.getCategoryId().equals(categoryId))
                         .findFirst().get();
         categories.remove(category);
-        return "Category with CategoryId: " + categroyId;
+        return "Category with CategoryId: " + categoryId + "Deleted.";
     }
 }
