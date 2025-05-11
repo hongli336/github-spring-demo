@@ -28,6 +28,11 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
+    public void updateCategory(Category category) {
+        categories.update(category);
+    }
+
+    @Override
     public String deleteCategory(Long categoryId) {
         Category category = categories.stream()
                 .filter(c -> c.getCategoryId().equals(categoryId))
