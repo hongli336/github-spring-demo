@@ -23,23 +23,14 @@ public class CategoryController {
 
     @GetMapping("/api/public/categories")
     public ResponseEntity<List<Category>> getAllCategories() {
-        try {
-            List<Category> categories= categoryService.getAllCategories();
-            return new ResponseEntity<>(categories, HttpStatus);
-        } catch (ResponseStatusException e) {
-            return new ResponseEntity<>(e.getReason(), e.getStatusCode());
-        }
+        List<Category> categories= categoryService.getAllCategories();
+        return new ResponseEntity<>(categories, HttpStatus);
     }
 
     @PostMapping("/api/public/categories")
     public ResponseEntity<String> createCategory(@RequestBody Category category) {
-        try {
-            categoryService.createCategory(category);
-            //return "Category added successfully";
-            return new ResponseEntity<>("category added successfully", HttpStatus.CREATED);
-        } catch (ResponseStatusException e) {
-            return new ResponseEntity<>(e.getReason(), e.getStatusCode());
-        }
+        categoryService.createCategory(category);
+        return new ResponseEntity<>("category added successfully", HttpStatus.CREATED);
     }
 
     /*
