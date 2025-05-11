@@ -21,12 +21,18 @@ public class CategoryController {
         this.categoryService = categoryService;
     }
 
+    /*
+    Use ResponseEntity to return both the object body and the HTTP status
+     */
     @GetMapping("/api/public/categories")
     public ResponseEntity<List<Category>> getAllCategories() {
         List<Category> categories= categoryService.getAllCategories();
         return new ResponseEntity<>(categories, HttpStatus.OK);
     }
 
+    /*
+    Use ResponseEntity to return both the status and the HTTP status
+    */
     @PostMapping("/api/public/categories")
     public ResponseEntity<String> createCategory(@RequestBody Category category) {
         categoryService.createCategory(category);
