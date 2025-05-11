@@ -32,14 +32,20 @@ public class CategoryController {
         return "Category added successfully";
     }
 
+    /*
+     RESTful DELETE,  It:
+     Accepts a category ID,
+     Delegates deletion to the service layer,
+     Returns HTTP 200 on success, or
+     Returns a proper HTTP error (e.g., 404 Not Found) using ResponseStatusException.
+     */
     @DeleteMapping("/api/admin/categories/{categoryId}")
-    public String deleteCategory(@PathVariable Long categoryId) {
+    public ResponseEntity<String> deleteCategory(@PathVariable Long categoryId) {
         try {
             String status = categoryService.deleteCategory(categoryId);
-            return status;
+            return new ResponseEntity<>(status, HttpStatus.OK);
         } catch (ResponseStatusException e) {
             return new ResponseEntity<>(e.getReason(), e.getStatusCode());
         }
-
     }
 }
