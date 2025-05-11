@@ -41,8 +41,6 @@ public class CategoryServiceImpl implements CategoryService {
         } else {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Category id not found");
         }
-
-        return null;
     }
 
     @Override
