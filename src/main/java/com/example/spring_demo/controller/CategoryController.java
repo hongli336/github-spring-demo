@@ -34,12 +34,13 @@ public class CategoryController {
     Use ResponseEntity to return both the object body and the HTTP status
     */
     @PutMapping("/api/admin/categories/{categoryId}")
-    public ResponseEntity<String> updateCategory(@PathVariable Long categoryId, @RequestBody Category category) {
-        String status = categoryService.updateCategory(categoryId, category);
-        if ("Category not found".equals(status)) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Category not found");
+    public ResponseEntity<String> updateCategory(@RequestBody Category category, @PathVariable Long categoryId) {
+        try {
+            Category savedCategory = categoryService.updateCategory(category, categoryId);
+            return new ResponseEntity<>("Category with category id: " + categoryId + " updated.");
+        } catch {
+            return new ResponseEntity<>(e.getReason(), e.getStatusCode());
         }
-        return ResponseEntity.ok("Category updated successfully");
     }
 
     /*
