@@ -28,8 +28,8 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
-    public void updateCategory(Category category) {
-        categories.update(category);
+    public void updateCategory(Long categoryId, Category category) {
+        categories.update(categoryId, category);
     }
 
     @Override
