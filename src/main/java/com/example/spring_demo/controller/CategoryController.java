@@ -33,6 +33,7 @@ public class CategoryController {
 
     /*
     Use ResponseEntity to return both the object body and the HTTP status
+    PUT - update existing category
     */
     @PutMapping("/api/admin/categories/{categoryId}")
     public ResponseEntity<String> updateCategory(@RequestBody Category category, @PathVariable Long categoryId) {
@@ -46,8 +47,10 @@ public class CategoryController {
 
     /*
     Use ResponseEntity to return both the status and the HTTP status
+    Post - add new category
     */
-    @PostMapping("/api/public/categories")
+    //@PostMapping("/api/public/categories")
+    @RequestMapping(value = "/api/public/categories", method= RequestMethod.POST)
     public ResponseEntity<String> createCategory(@RequestBody Category category) {
         categoryService.createCategory(category);
         return new ResponseEntity<>("category added successfully", HttpStatus.CREATED);
