@@ -35,7 +35,8 @@ public class CategoryController {
     Use ResponseEntity to return both the object body and the HTTP status
     PUT - update existing category
     */
-    @PutMapping("/api/admin/categories/{categoryId}")
+    //@PutMapping("/api/admin/categories/{categoryId}")
+    @RequestMapping(value = "/api/admin/categories/{categoryId}", method= RequestMethod.PUT)
     public ResponseEntity<String> updateCategory(@RequestBody Category category, @PathVariable Long categoryId) {
         try {
             Category savedCategory = categoryService.updateCategory(category, categoryId);
@@ -63,7 +64,8 @@ public class CategoryController {
      Returns HTTP 200 on success, or
      Returns a proper HTTP error (e.g., 404 Not Found) using ResponseStatusException.
      */
-    @DeleteMapping("/api/admin/categories/{categoryId}")
+    //@DeleteMapping("/api/admin/categories/{categoryId}")
+    @RequestMapping(value = "/api/admin/categories/{categoryId}", method= RequestMethod.Delete)
     public ResponseEntity<String> deleteCategory(@PathVariable Long categoryId) {
         try {
             String status = categoryService.deleteCategory(categoryId);
