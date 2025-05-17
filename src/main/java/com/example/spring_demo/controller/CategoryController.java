@@ -24,7 +24,8 @@ public class CategoryController {
     /*
     Use ResponseEntity to return both the object body and the HTTP status
      */
-    @GetMapping("/api/public/categories")
+    //@GetMapping("/api/public/categories")
+    @RequestMapping(value = "/api/public/categories", method= RequestMethod.GET)
     public ResponseEntity<List<Category>> getAllCategories() {
         List<Category> categories= categoryService.getAllCategories();
         return new ResponseEntity<>(categories, HttpStatus.OK);
