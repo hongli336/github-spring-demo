@@ -66,7 +66,7 @@ public class CategoryController {
      Returns a proper HTTP error (e.g., 404 Not Found) using ResponseStatusException.
      */
     //@DeleteMapping("/api/admin/categories/{categoryId}")
-    @RequestMapping(value = "/admin/categories/{categoryId}", method= RequestMethod.Delete)
+    @RequestMapping(value = "/admin/categories/{categoryId}", method= RequestMethod.DELETE)
     public ResponseEntity<String> deleteCategory(@PathVariable Long categoryId) {
         try {
             String status = categoryService.deleteCategory(categoryId);
