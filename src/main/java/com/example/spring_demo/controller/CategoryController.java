@@ -13,6 +13,7 @@ import java.util.List;
 import java.util.ArrayList;
 
 @RestController
+@RequestMapping("/api")
 public class CategoryController {
 
     private CategoryService categoryService;
@@ -25,7 +26,7 @@ public class CategoryController {
     Use ResponseEntity to return both the object body and the HTTP status
      */
     //@GetMapping("/api/public/categories")
-    @RequestMapping(value = "/api/public/categories", method= RequestMethod.GET)
+    @RequestMapping(value = "/public/categories", method= RequestMethod.GET)
     public ResponseEntity<List<Category>> getAllCategories() {
         List<Category> categories= categoryService.getAllCategories();
         return new ResponseEntity<>(categories, HttpStatus.OK);
@@ -36,7 +37,7 @@ public class CategoryController {
     PUT - update existing category
     */
     //@PutMapping("/api/admin/categories/{categoryId}")
-    @RequestMapping(value = "/api/admin/categories/{categoryId}", method= RequestMethod.PUT)
+    @RequestMapping(value = "/admin/categories/{categoryId}", method= RequestMethod.PUT)
     public ResponseEntity<String> updateCategory(@RequestBody Category category, @PathVariable Long categoryId) {
         try {
             Category savedCategory = categoryService.updateCategory(category, categoryId);
@@ -51,7 +52,7 @@ public class CategoryController {
     Post - add new category
     */
     //@PostMapping("/api/public/categories")
-    @RequestMapping(value = "/api/public/categories", method= RequestMethod.POST)
+    @RequestMapping(value = "/public/categories", method= RequestMethod.POST)
     public ResponseEntity<String> createCategory(@RequestBody Category category) {
         categoryService.createCategory(category);
         return new ResponseEntity<>("category added successfully", HttpStatus.CREATED);
@@ -65,7 +66,7 @@ public class CategoryController {
      Returns a proper HTTP error (e.g., 404 Not Found) using ResponseStatusException.
      */
     //@DeleteMapping("/api/admin/categories/{categoryId}")
-    @RequestMapping(value = "/api/admin/categories/{categoryId}", method= RequestMethod.Delete)
+    @RequestMapping(value = "/admin/categories/{categoryId}", method= RequestMethod.Delete)
     public ResponseEntity<String> deleteCategory(@PathVariable Long categoryId) {
         try {
             String status = categoryService.deleteCategory(categoryId);
