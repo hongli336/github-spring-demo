@@ -1,6 +1,6 @@
-package com.example.spring_demo;
+package com.example.spring_demo.service;
 
-import com.example.spring_demo.Book;
+import com.example.spring_demo.model.Book;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface BookRepository extends JpaRepository<Book, Long> {
