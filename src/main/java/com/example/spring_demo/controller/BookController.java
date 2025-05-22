@@ -1,6 +1,6 @@
 package com.example.spring_demo.controller;
 
-import com.example.spring_demo.service.BookRepository;
+import com.example.spring_demo.repositories.BookRepository;
 import com.example.spring_demo.model.Book;
 
 import org.springframework.beans.factory.annotation.Autowired;

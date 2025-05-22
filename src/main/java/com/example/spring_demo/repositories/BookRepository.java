@@ -1,4 +1,4 @@
-package com.example.spring_demo.service;
+package com.example.spring_demo.repositories;
 
 import com.example.spring_demo.model.Book;
 import org.springframework.data.jpa.repository.JpaRepository;
