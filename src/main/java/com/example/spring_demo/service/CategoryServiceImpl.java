@@ -30,7 +30,7 @@ public class CategoryServiceImpl implements CategoryService {
 
     @Override
     public void createCategory(Category category) {
-        category.setCategoryId(nextId++);
+        //category.setCategoryId(nextId++);
         //categories.add(category);
         categoryRepository.save(category);
     }
