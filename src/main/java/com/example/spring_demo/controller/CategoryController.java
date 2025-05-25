@@ -1,6 +1,7 @@
 package com.example.spring_demo.controller;
 import com.example.spring_demo.model.Category;
 import com.example.spring_demo.service.CategoryService;
+import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
 
 import org.springframework.http.HttpStatus;
@@ -53,7 +54,7 @@ public class CategoryController {
     */
     //@PostMapping("/api/public/categories")
     @RequestMapping(value = "/public/categories", method= RequestMethod.POST)
-    public ResponseEntity<String> createCategory(@RequestBody Category category) {
+    public ResponseEntity<String> createCategory(@Valid @RequestBody Category category) {
         categoryService.createCategory(category);
         return new ResponseEntity<>("category added successfully", HttpStatus.CREATED);
     }
