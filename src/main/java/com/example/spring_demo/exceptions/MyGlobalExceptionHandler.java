@@ -9,9 +9,10 @@ import java.util.HashMap;
 import java.util.Map;
 
 @RestControllerAdvice
-@ExceptionHandler
+
 public class MyGlobalExceptionHandler {
 
+    @ExceptionHandler(MethodArgumentNotValidException.class)
     public Map<String, String> myMethodArgumentNotValidException(MethodArgumentNotValidException e){
         Map<String, String> response = new HashMap<>();
         e.getBindingResult().getAllErrors().forEach(err -> {
