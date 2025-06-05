@@ -1,5 +1,6 @@
 package com.example.spring_demo.service;
 
+import com.example.spring_demo.exceptions.ResourceNotFoundException;
 import com.example.spring_demo.model.Category;
 import com.example.spring_demo.repositories.CategoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,7 +40,10 @@ public class CategoryServiceImpl implements CategoryService {
     public Category updateCategory(Category category, Long categoryId) {
 
         Category savedCategory = categoryRepository.findById(categoryId)
-                .orElseThrow(()-> new ResponseStatusException(HttpStatus.NOT_FOUND, "Resource not found."));
+                .orElseThrow(() -> new ResourceNotFoundException("Category", "id", categoryId));
+
+        // Category savedCategory = categoryRepository.findById(categoryId)
+        // .orElseThrow(()-> new ResponseStatusException(HttpStatus.NOT_FOUND, "Resource not found."));
         category.setCategoryId(categoryId);
         savedCategory = categoryRepository.save(category);
         return savedCategory;
@@ -48,8 +52,12 @@ public class CategoryServiceImpl implements CategoryService {
     @Override
     public String deleteCategory(Long categoryId) {
 
-        Category category = categoryRepository.findById(categoryId)
-                .orElseThrow(()-> new ResponseStatusException(HttpStatus.NOT_FOUND, "Resource not found."));
+
+        Category savedCategory = categoryRepository.findById(categoryId)
+                .orElseThrow(() -> new ResourceNotFoundException("Category", "id", categoryId));
+
+        // Category category = categoryRepository.findById(categoryId)
+        //        .orElseThrow(()-> new ResponseStatusException(HttpStatus.NOT_FOUND, "Resource not found."));
 
         categoryRepository.delete(category);
         return "Category with CategoryId: " + categoryId + " deleted.";
