@@ -1,5 +1,6 @@
 package com.example.spring_demo.service;
 
+import com.example.spring_demo.exceptions.APIException;
 import com.example.spring_demo.exceptions.ResourceNotFoundException;
 import com.example.spring_demo.model.Category;
 import com.example.spring_demo.repositories.CategoryRepository;
@@ -31,6 +32,9 @@ public class CategoryServiceImpl implements CategoryService {
 
     @Override
     public void createCategory(Category category) {
+        Category savedCategory = categoryRepository.findByCategoryName(category.getCategoryName());
+        if (savedCategory != null)
+            throw new APIException("Category with the name" + category.getCategoryName() + "already exist.");
         //category.setCategoryId(nextId++);
         //categories.add(category);
         categoryRepository.save(category);
