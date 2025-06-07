@@ -52,14 +52,13 @@ public class CategoryServiceImpl implements CategoryService {
     @Override
     public String deleteCategory(Long categoryId) {
 
-
         Category savedCategory = categoryRepository.findById(categoryId)
                 .orElseThrow(() -> new ResourceNotFoundException("Category", "categoryId", categoryId));
 
         // Category category = categoryRepository.findById(categoryId)
         //        .orElseThrow(()-> new ResponseStatusException(HttpStatus.NOT_FOUND, "Resource not found."));
 
-        categoryRepository.delete(category);
+        categoryRepository.delete(savedCategory);
         return "Category with CategoryId: " + categoryId + " deleted.";
     }
 }
