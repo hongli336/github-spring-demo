@@ -19,7 +19,7 @@ import java.util.Optional;
 public class CategoryServiceImpl implements CategoryService {
 
     //private List<Category> categories = new ArrayList<>();
-    private Long nextId = 1L;
+    //private Long nextId = 1L;
 
     @Autowired
     private CategoryRepository categoryRepository;
