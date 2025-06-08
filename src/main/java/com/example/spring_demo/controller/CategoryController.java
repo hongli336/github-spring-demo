@@ -40,12 +40,8 @@ public class CategoryController {
     //@PutMapping("/api/admin/categories/{categoryId}")
     @RequestMapping(value = "/admin/categories/{categoryId}", method= RequestMethod.PUT)
     public ResponseEntity<String> updateCategory(@RequestBody Category category, @PathVariable Long categoryId) {
-        try {
-            Category savedCategory = categoryService.updateCategory(category, categoryId);
-            return new ResponseEntity<>("Category with category id: " + categoryId + " updated.", HttpStatus.OK);
-        } catch (ResponseStatusException e){
-            return new ResponseEntity<>(e.getReason(), e.getStatusCode());
-        }
+        Category savedCategory = categoryService.updateCategory(category, categoryId);
+        return new ResponseEntity<>("Category with category id: " + categoryId + " updated.", HttpStatus.OK);
     }
 
     /*
@@ -69,7 +65,7 @@ public class CategoryController {
     //@DeleteMapping("/api/admin/categories/{categoryId}")
     @RequestMapping(value = "/admin/categories/{categoryId}", method= RequestMethod.DELETE)
     public ResponseEntity<String> deleteCategory(@PathVariable Long categoryId) {
-            String status = categoryService.deleteCategory(categoryId);
-            return new ResponseEntity<>(status, HttpStatus.OK);
+        String status = categoryService.deleteCategory(categoryId);
+        return new ResponseEntity<>(status, HttpStatus.OK);
     }
 }
