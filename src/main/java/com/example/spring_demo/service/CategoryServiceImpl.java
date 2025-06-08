@@ -31,8 +31,8 @@ public class CategoryServiceImpl implements CategoryService {
         List<Category> categories = categoryRepository.findAll();
 
         for (Category category : categories) {
-            if (category.getName() == null) {
-                throw new IllegalStateException("Category with null name found. Category ID: " + category.getId());
+            if (category.getCategoryName() == null) {
+                throw new IllegalStateException("Category with null name found. Category ID: " + category.getCategoryId());
             }
         }
 
