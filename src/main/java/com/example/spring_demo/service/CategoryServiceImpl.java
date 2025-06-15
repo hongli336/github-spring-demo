@@ -9,11 +9,13 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 import java.util.concurrent.atomic.AtomicLong;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.server.ResponseStatusException;
 import java.util.Optional;
+import com.example.spring_demo.payload.CategoryDTO;
 
 @Service
 public class CategoryServiceImpl implements CategoryService {
@@ -25,7 +27,7 @@ public class CategoryServiceImpl implements CategoryService {
     private CategoryRepository categoryRepository;
 
     @Override
-    public List<Category> getAllCategories(){
+    public List<CategoryDTO> getAllCategories(){
         //return categoryRepository.findAll();
         //return categories;
         List<Category> categories = categoryRepository.findAll();
@@ -36,30 +38,38 @@ public class CategoryServiceImpl implements CategoryService {
             }
         }
 
-        return categories;
+        return categories.stream()
+                .map(this::convertToDTO)
+                .collect(Collectors.toList());
     }
 
     @Override
-    public void createCategory(Category category) {
-        Category savedCategory = categoryRepository.findByCategoryName(category.getCategoryName());
+    public void createCategory(CategoryDTO categoryDTO) {
+        Category savedCategory = categoryRepository.findByCategoryName(categoryDTO.getCategoryName());
         if (savedCategory != null)
-            throw new APIException("Category with the name " + category.getCategoryName() + " already exist.");
+            throw new APIException("Category with the name " + categoryDTO.getCategoryName() + " already exist.");
         //category.setCategoryId(nextId++);
         //categories.add(category);
+        Category category = convertToEntity(categoryDTO);
         categoryRepository.save(category);
     }
 
     @Override
-    public Category updateCategory(Category category, Long categoryId) {
+    public Category updateCategory(CategoryDTO categoryDTO, Long categoryId) {
 
         Category savedCategory = categoryRepository.findById(categoryId)
                 .orElseThrow(() -> new ResourceNotFoundException("Category", "categoryId", categoryId));
 
+        savedCategory.setCategoryName(categoryDTO.getCategoryName());
+        Category updatedCategory = categoryRepository.save(savedCategory);
+
+        return convertToDTO(updatedCategory);
+
         // Category savedCategory = categoryRepository.findById(categoryId)
         // .orElseThrow(()-> new ResponseStatusException(HttpStatus.NOT_FOUND, "Resource not found."));
-        category.setCategoryId(categoryId);
-        savedCategory = categoryRepository.save(category);
-        return savedCategory;
+        // category.setCategoryId(categoryId);
+        // savedCategory = categoryRepository.save(category);
+        // return savedCategory;
     }
 
     @Override
@@ -73,5 +83,18 @@ public class CategoryServiceImpl implements CategoryService {
 
         categoryRepository.delete(savedCategory);
         return "Category with CategoryId: " + categoryId + " deleted.";
+    }
+
+    // Helper method to convert Entity to DTO
+    private CategoryDTO convertToDTO(Category category) {
+        return new CategoryDTO(category.getCategoryId(), category.getCategoryName());
+    }
+
+    // Helper method to convert DTO to Entity
+    private Category convertToEntity(CategoryDTO categoryDTO) {
+        Category category = new Category();
+        category.setCategoryId(categoryDTO.getCategoryId()); // optional for create
+        category.setCategoryName(categoryDTO.getCategoryName());
+        return category;
     }
 }
