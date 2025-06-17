@@ -1,5 +1,6 @@
 package com.example.spring_demo.controller;
 import com.example.spring_demo.model.Category;
+import com.example.spring_demo.payload.CategoryDTO;
 import com.example.spring_demo.service.CategoryService;
 import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
@@ -28,8 +29,8 @@ public class CategoryController {
      */
     //@GetMapping("/api/public/categories")
     @RequestMapping(value = "/public/categories", method= RequestMethod.GET)
-    public ResponseEntity<List<Category>> getAllCategories() {
-        List<Category> categories= categoryService.getAllCategories();
+    public ResponseEntity<List<CategoryDTO>> getAllCategories() {
+        List<CategoryDTO> categories= categoryService.getAllCategories();
         return new ResponseEntity<>(categories, HttpStatus.OK);
     }
 
@@ -39,8 +40,8 @@ public class CategoryController {
     */
     //@PutMapping("/api/admin/categories/{categoryId}")
     @RequestMapping(value = "/admin/categories/{categoryId}", method= RequestMethod.PUT)
-    public ResponseEntity<String> updateCategory(@RequestBody Category category, @PathVariable Long categoryId) {
-        Category savedCategory = categoryService.updateCategory(category, categoryId);
+    public ResponseEntity<String> updateCategory(@RequestBody CategoryDTO categoryDTO, @PathVariable Long categoryId) {
+        categoryService.updateCategory(categoryDTO, categoryId);
         return new ResponseEntity<>("Category with category id: " + categoryId + " updated.", HttpStatus.OK);
     }
 
@@ -50,8 +51,8 @@ public class CategoryController {
     */
     //@PostMapping("/api/public/categories")
     @RequestMapping(value = "/public/categories", method= RequestMethod.POST)
-    public ResponseEntity<String> createCategory(@Valid @RequestBody Category category) {
-        categoryService.createCategory(category);
+    public ResponseEntity<String> createCategory(@Valid @RequestBody CategoryDTO categoryDTO) {
+        categoryService.createCategory(categoryDTO);
         return new ResponseEntity<>("category added successfully", HttpStatus.CREATED);
     }
 
