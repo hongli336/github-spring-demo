@@ -50,10 +50,16 @@ CategoryResponse is a wrapper DTO (Data Transfer Object). It defines exactly wha
 Instead of returning raw entities or collections, you return a custom response object that:
 
 Hides internal data you don’t want to expose (like DB IDs, timestamps, etc.)
-
 Structures the output (e.g., adding metadata or status)
-
 Makes the response more predictable and versionable
+
+Wrap the response using ResponseEntity<T>
+ResponseEntity<T> is a Spring class that wraps your response data (T) with HTTP metadata, such as:
+This allows you to:
+
+Change status: ResponseEntity.status(HttpStatus.NOT_FOUND).body(...)
+Add headers: .header("X-Custom", "value")
+Return empty with status: ResponseEntity.noContent().build()
 
 3. Repository Layer – Communicates with the database
 java

@@ -49,7 +49,13 @@ public class CategoryController {
     /*
     Use ResponseEntity to return both the status and the HTTP status
     Post - add new category
+    @PostMapping("/categories"): Handles POST requests to create a new category.
+
+    @RequestBody CategoryDTO categoryDTO:
+    Spring automatically deserializes the JSON body of the request into a CategoryDTO object.
+    This requires that the incoming JSON matches the fields in CategoryDTO.
     */
+
     //@PostMapping("/api/public/categories")
     @RequestMapping(value = "/public/categories", method= RequestMethod.POST)
     public ResponseEntity<String> createCategory(@Valid @RequestBody CategoryDTO categoryDTO) {
