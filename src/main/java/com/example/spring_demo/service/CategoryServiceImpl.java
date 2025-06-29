@@ -95,11 +95,6 @@ public class CategoryServiceImpl implements CategoryService {
 
         return savedCategoryDTO ;
 
-        // Category savedCategory = categoryRepository.findById(categoryId)
-        // .orElseThrow(()-> new ResponseStatusException(HttpStatus.NOT_FOUND, "Resource not found."));
-        // category.setCategoryId(categoryId);
-        // savedCategory = categoryRepository.save(category);
-        // return savedCategory;
     }
 
     @Override
