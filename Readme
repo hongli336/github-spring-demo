@@ -39,6 +39,22 @@ public class CategoryService {
     }
 }
 
+note:
+
+Why the service layer returns a CategoryResponse object to the controller, instead of returning something simpler
+like a List<Category> or just the entities directly.
+
+✅ Why Use CategoryResponse?
+1. Encapsulation of API Structure
+CategoryResponse is a wrapper DTO (Data Transfer Object). It defines exactly what the API should return — nothing more, nothing less.
+Instead of returning raw entities or collections, you return a custom response object that:
+
+Hides internal data you don’t want to expose (like DB IDs, timestamps, etc.)
+
+Structures the output (e.g., adding metadata or status)
+
+Makes the response more predictable and versionable
+
 3. Repository Layer – Communicates with the database
 java
 Copy
@@ -92,3 +108,16 @@ Repository fetches data from the database (via JPA/Hibernate)
 Service maps Category entities to DTOs and wraps them in a response
 
 Controller returns the ResponseEntity<CategoryResponse> to the client
+
+===
+
+1. Separation of Concerns
+Each layer has one clear responsibility:
+
+Controller: Handles HTTP/web stuff — URL paths, status codes, input/output.
+
+Service: Contains business logic — what should happen and how.
+
+Repository (DAO): Only knows how to talk to the database.
+
+Keeping these separate makes your code easier to test, maintain, and change.
