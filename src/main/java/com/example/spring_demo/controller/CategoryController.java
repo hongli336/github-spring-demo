@@ -43,7 +43,6 @@ public class CategoryController {
     @RequestMapping(value = "/admin/categories/{categoryId}", method= RequestMethod.PUT)
     public ResponseEntity<CategoryDTO> updateCategory(@RequestBody CategoryDTO categoryDTO, @PathVariable Long categoryId) {
         CategoryDTO savedCategoryDTO = categoryService.updateCategory(categoryDTO, categoryId);
-        //return new ResponseEntity<>("Category with category id: " + categoryId + " updated.", HttpStatus.OK);
         return new ResponseEntity<>(savedCategoryDTO, HttpStatus.OK);
     }
 
@@ -74,7 +73,6 @@ public class CategoryController {
     //@DeleteMapping("/api/admin/categories/{categoryId}")
     @RequestMapping(value = "/admin/categories/{categoryId}", method= RequestMethod.DELETE)
     public ResponseEntity<CategoryDTO> deleteCategory(@PathVariable Long categoryId) {
-       // String status = categoryService.deleteCategory(categoryId);
         CategoryDTO savedCategoryDTO = categoryService.deleteCategory(categoryId);
         return new ResponseEntity<>(savedCategoryDTO, HttpStatus.OK);
     }
