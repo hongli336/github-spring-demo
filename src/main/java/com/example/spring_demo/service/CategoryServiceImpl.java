@@ -3,7 +3,9 @@ package com.example.spring_demo.service;
 import com.example.spring_demo.exceptions.APIException;
 import com.example.spring_demo.exceptions.ResourceNotFoundException;
 import com.example.spring_demo.model.Category;
+import com.example.spring_demo.payload.CategoryResponse;
 import com.example.spring_demo.repositories.CategoryRepository;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -26,6 +28,10 @@ public class CategoryServiceImpl implements CategoryService {
     @Autowired
     private CategoryRepository categoryRepository;
 
+    @Autowired
+    private ModelMapper modelMapper;
+
+    /*
     @Override
     public List<CategoryDTO> getAllCategories(){
         //return categoryRepository.findAll();
@@ -42,6 +48,25 @@ public class CategoryServiceImpl implements CategoryService {
                 .map(this::convertToDTO)
                 .collect(Collectors.toList());
     }
+    */
+
+    public CategoryResponse getAllCategories(){
+        //return categoryRepository.findAll();
+        //return categories;
+        List<Category> categories = categoryRepository.findAll();
+
+        if (categories.isEmpty())
+            throw new APIException("No category created till now.");
+
+        List<CategoryDTO> categoryDTOS  = categories.stream()
+                .map(category -> modelMapper.map(category, CategoryDTO.class))
+                .toList();
+
+        CategoryResponse categoryResponse = new CategoryResponse();
+        categoryResponse.setContent(categoryDTOS);
+        return categoryResponse;
+    }
+
 
     @Override
     public void createCategory(CategoryDTO categoryDTO) {

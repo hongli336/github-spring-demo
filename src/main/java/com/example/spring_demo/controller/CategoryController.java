@@ -1,6 +1,7 @@
 package com.example.spring_demo.controller;
 import com.example.spring_demo.model.Category;
 import com.example.spring_demo.payload.CategoryDTO;
+import com.example.spring_demo.payload.CategoryResponse;
 import com.example.spring_demo.service.CategoryService;
 import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
@@ -29,9 +30,9 @@ public class CategoryController {
      */
     //@GetMapping("/api/public/categories")
     @RequestMapping(value = "/public/categories", method= RequestMethod.GET)
-    public ResponseEntity<List<CategoryDTO>> getAllCategories() {
-        List<CategoryDTO> categories= categoryService.getAllCategories();
-        return new ResponseEntity<>(categories, HttpStatus.OK);
+    public ResponseEntity<CategoryResponse> getAllCategories() {
+        CategoryResponse categoryResponse = categoryService.getAllCategories();
+        return new ResponseEntity<>(categoryResponse, HttpStatus.OK);
     }
 
     /*

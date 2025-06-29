@@ -1,1 +1,94 @@
 demo java spring boot: eCommerce project practice
+
+typical Spring Boot flow from controller → service → repository (DAO)
+
+1. Controller Layer – Handles HTTP requests
+java
+Copy
+Edit
+@RestController
+@RequestMapping("/api")
+public class CategoryController {
+
+    @Autowired
+    private CategoryService categoryService;
+
+    @GetMapping("/public/categories")
+    public ResponseEntity<CategoryResponse> getAllCategories() {
+        CategoryResponse response = categoryService.getAllCategories();
+        return ResponseEntity.ok(response);
+    }
+}
+
+2 Service Layer – Contains business logic
+@Service
+public class CategoryService {
+
+    @Autowired
+    private CategoryRepository categoryRepository;
+
+    public CategoryResponse getAllCategories() {
+        List<Category> categoryList = categoryRepository.findAll();
+
+        // Convert list to response DTO
+        List<CategoryDTO> categoryDTOs = categoryList.stream()
+                .map(cat -> new CategoryDTO(cat.getId(), cat.getName()))
+                .collect(Collectors.toList());
+
+        return new CategoryResponse(categoryDTOs);
+    }
+}
+
+3. Repository Layer – Communicates with the database
+java
+Copy
+Edit
+@Repository
+public interface CategoryRepository extends JpaRepository<Category, Long> {
+    // findAll() is provided by JpaRepository
+}
+
+4. Entity Class – Represents table in the database
+java
+Copy
+Edit
+@Entity
+public class Category {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    private String name;
+
+    // Constructors, Getters, Setters
+}
+
+5. DTO and Response Wrapper – Used to shape API output
+java
+Copy
+Edit
+public class CategoryDTO {
+    private Long id;
+    private String name;
+    // constructor, getters, setters
+}
+
+public class CategoryResponse {
+    private List<CategoryDTO> categories;
+    // constructor, getters, setters
+}
+
+
+ Summary of Flow:
+Client calls GET /api/public/categories
+
+Controller receives the request and delegates to CategoryService
+
+Service gets all categories via CategoryRepository.findAll()
+
+Repository fetches data from the database (via JPA/Hibernate)
+
+Service maps Category entities to DTOs and wraps them in a response
+
+Controller returns the ResponseEntity<CategoryResponse> to the client
