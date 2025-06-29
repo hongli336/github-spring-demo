@@ -91,8 +91,9 @@ public class CategoryServiceImpl implements CategoryService {
 
         savedCategory.setCategoryName(categoryDTO.getCategoryName());
         Category updatedCategory = categoryRepository.save(savedCategory);
+        CategoryDTO savedCategoryDTO = modelMapper.map(updatedCategory, CategoryDTO.class);
 
-        return convertToDTO(updatedCategory);
+        return savedCategoryDTO ;
 
         // Category savedCategory = categoryRepository.findById(categoryId)
         // .orElseThrow(()-> new ResponseStatusException(HttpStatus.NOT_FOUND, "Resource not found."));
