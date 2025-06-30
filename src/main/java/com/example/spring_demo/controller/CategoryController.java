@@ -26,7 +26,7 @@ public class CategoryController {
     }
 
     @GetMapping("/echo")
-    public ResponseEntity<String> echoMessage (@RequestParam(name = "message") string message) {
+    public ResponseEntity<String> echoMessage (@RequestParam(name = "message") String message) {
         return new ResponseEntity<>("Echo message: " + message, HttpStatus.OK);
     }
 
