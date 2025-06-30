@@ -25,6 +25,12 @@ public class CategoryController {
         this.categoryService = categoryService;
     }
 
+    @GetMapping("/echo")
+    public ResponseEntity<String> echoMessage (@RequestParam(name = "message") string message) {
+        return new ResponseEntity<>("Echo message: " + message, HttpStatus.OK);
+    }
+
+
     /*
     Use ResponseEntity to return both the object body and the HTTP status
      */
