@@ -1,5 +1,6 @@
 package com.example.spring_demo.payload;
 
+import jakarta.persistence.criteria.CriteriaBuilder;
 import lombok.Data;                // Generates getters, setters, toString, equals, and hashCode
 import lombok.AllArgsConstructor;  // Generates a constructor with all fields as parameters
 import lombok.NoArgsConstructor;   // Generates a no-argument constructor
@@ -26,4 +27,9 @@ With a CategoryResponse, you don’t need to change the controller or client cod
 @AllArgsConstructor
 public class CategoryResponse {
     private List<CategoryDTO> content;
+    private Integer pageNumber;
+    private Integer pageSize;
+    private Integer totalElements;
+    private Integer totalpages;
+    private boolean lastPage;
 }
